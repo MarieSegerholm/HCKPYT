@@ -4,7 +4,6 @@ import os
 import datetime
 import streamlit.components.v1 as components
 
-# 🔊 Talsyntes via JavaScript
 def web_speak(text):
     js = f"""
     <script>
@@ -15,7 +14,6 @@ def web_speak(text):
     """
     components.html(js, height=0)
 
-# 🔐 Spara & ladda barnprofil
 def get_filename(name, pin):
     return f"profil_{name}_{pin}.json"
 
@@ -38,7 +36,6 @@ def save_profile(name, pin, data):
     with open(file, "w") as f:
         json.dump(data, f)
 
-# 🖥️ Start appen
 st.set_page_config(page_title="HorseClub Kids – DELUXE", layout="centered")
 st.title("🐴 HorseClub Kids – DELUXE")
 
@@ -46,6 +43,7 @@ name = st.text_input("Ditt namn:")
 pin = st.text_input("PIN (4 siffror):", type="password", max_chars=4)
 voice_on = st.checkbox("🔊 Aktivera röst", value=True)
 
+# Börja spelet först när båda fälten är ifyllda
 if name and pin:
     profile = load_profile(name, pin)
     today = str(datetime.date.today())
@@ -118,3 +116,4 @@ if name and pin:
                 web_speak("Grattis! Du vann tävlingen.")
 
     save_profile(name, pin, profile)
+
